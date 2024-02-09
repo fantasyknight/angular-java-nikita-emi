@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.form-group {
+    @apply flex justify-between items-center
+}
+
+.form-input {
+    @apply max-w-44 ml-3 py-1 text-right focus-visible:outline-none
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('assets/images/background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}

@@ -1,0 +1,129 @@
+<main>
+  <form [formGroup]="emiForm" (ngSubmit)="onSubmit()"
+    class="flex flex-col absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 sm:w-[25rem] w-[18 rem] rounded-md overflow-hidden"
+    novalidate>
+    <div class="border-gray-300 border-b-[1px] py-3 px-5  bg-white">
+      <div class="form-group">
+        <label>Loan value:</label>
+
+        <div class="relative">
+          <input class="form-input px-2 mr-4" formControlName="loanValue" type="number">
+          <span class="absolute right-0 top-1/2 -translate-y-1/2 text-sm">$</span>
+        </div>
+      </div>
+
+      <div
+        *ngIf="emiForm.controls['loanValue'].invalid && (emiForm.controls['loanValue'].dirty || emiForm.controls['loanValue'].touched)"
+        class="text-red-600 text-sm">
+        <div *ngIf="emiForm.controls['loanValue'].errors && emiForm.controls['loanValue'].errors['min']">
+          Loan value must be positive.
+        </div>
+
+        <div *ngIf="emiForm.controls['loanValue'].errors && emiForm.controls['loanValue'].errors['required']">
+          Loan value is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="border-gray-300 border-b-[1px] py-3 px-5  bg-white">
+      <div class="form-group">
+        <label>Yearly interest rate:</label>
+
+        <div class="relative">
+          <input class="form-input px-2 mr-4" formControlName="yearlyInterestRate" type="number">
+          <span class="absolute right-0 top-1/2 -translate-y-1/2 text-sm">%</span>
+        </div>
+      </div>
+
+      <div
+        *ngIf="emiForm.controls['yearlyInterestRate'].invalid && (emiForm.controls['yearlyInterestRate'].dirty || emiForm.controls['yearlyInterestRate'].touched)"
+        class="text-red-600 text-sm">
+        <div
+          *ngIf="emiForm.controls['yearlyInterestRate'].errors && emiForm.controls['yearlyInterestRate'].errors['min']">
+          Interest can't be negative.
+        </div>
+
+        <div
+          *ngIf="emiForm.controls['yearlyInterestRate'].errors && emiForm.controls['yearlyInterestRate'].errors['max']">
+          Interest must be less than 101.
+        </div>
+
+        <div
+          *ngIf="emiForm.controls['yearlyInterestRate'].errors && emiForm.controls['yearlyInterestRate'].errors['required']">
+          Interest is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="border-gray-300 border-b-[1px] py-3 px-5  bg-white">
+      <div class="form-group">
+        <label>Loan term in years:</label>
+
+        <div class="relative">
+          <input class="form-input px-2 mr-4" formControlName="loanTerm" type="number">
+          <span class="absolute right-0 top-1/2 -translate-y-1/2 text-sm">yrs</span>
+        </div>
+      </div>
+
+      <div
+        *ngIf="emiForm.controls['loanTerm'].invalid && (emiForm.controls['loanTerm'].dirty || emiForm.controls['loanTerm'].touched)"
+        class="text-red-600 text-sm">
+        <div *ngIf="emiForm.controls['loanTerm'].errors && emiForm.controls['loanTerm'].errors['min']">
+          Loan term can't be negative.
+        </div>
+
+        <div *ngIf="emiForm.controls['loanTerm'].errors && emiForm.controls['loanTerm'].errors['max']">
+          Loan term must be less than 31.
+        </div>
+
+        <div *ngIf="emiForm.controls['loanTerm'].errors && emiForm.controls['loanTerm'].errors['required']">
+          Loan term is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="border-gray-300 border-b-[1px] py-3 px-5  bg-white">
+      <div class="form-group">
+        <label>Email of the user:</label>
+
+        <div class="relative">
+          <input class="form-input pl-2 text-sm" formControlName="email" type="email" placeholder="a@b.com">
+        </div>
+      </div>
+
+      <div
+        *ngIf="emiForm.controls['email'].invalid && (emiForm.controls['email'].dirty || emiForm.controls['email'].touched)"
+        class="text-red-600 text-sm">
+        <div *ngIf="emiForm.controls['email'].errors && emiForm.controls['email'].errors['required']">
+          Email address is required.
+        </div>
+
+        <div *ngIf="emiForm.controls['email'].errors && emiForm.controls['email'].errors['email']">
+          This is not a email form.
+        </div>
+      </div>
+    </div>
+
+    <div class="py-3 px-5 bg-white border-gray-300 border-b-[1px]">
+      <ng-template #errorBlock>
+        <span class="text-red-500">{{emiError}}</span>
+      </ng-template>
+
+      <div class="form-group" *ngIf="emiError === ''; else errorBlock">
+        <span>Result:</span>
+
+        <div class="relative">
+          <span class="mr-4">{{emiValue.toFixed(2)}}</span>
+          <span class="absolute right-0 top-1/2 -translate-y-1/2 text-sm">$</span>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="emiForm.pristine || emiForm.invalid"
+      class="btn btn-success ml-auto w-full p-3 text-center hover:bg-green-600 disabled:hover:text-white transition-all disabled:cursor-not-allowed disabled:bg-gray-400 disabled:!text-dark bg-green-300">
+      Submit
+    </button>
+  </form>
+</main>
+
+<router-outlet></router-outlet>
