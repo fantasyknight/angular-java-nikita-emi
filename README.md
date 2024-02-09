@@ -21,3 +21,6 @@ Frontend
 
 Backend
 - Open the project with your IDE, then install dependencies.use `mvn spring-boot:run` to start the application
+
+
+![image](https://github.com/fantasyknight/angular-java-nikita-emi/assets/95362611/2852c633-a5e9-414c-8029-0247ae321781)
